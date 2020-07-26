@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GO</title>
+</head>
+<style>
+  html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .board {
+    width: 500px;
+    height: 500px;
+    background-color: #f4bf65;
+    border:solid 1px black;
+    display: grid;
+    grid-template-columns: repeat(16, 1fr);
+    grid-template-rows: repeat(16, 1fr);
+  }
+
+  .board > div {
+    width: 100%;
+    height: 100%;
+    border: black solid 1px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .black, .white {
+    width: 80%;
+    height: 80%;
+    border-radius: 10px;
+  }
+
+  .black {
+    background-color: black;
+  }
+
+  .white {
+    background-color: white;
+  }
+
+</style>
+<body>
+  <div class="board">
+  </div>
+</body>
+
+<script>
+  let turn = 'black';
+  const boardEl = document.querySelector('.board');
+  for (let i = 0; i < 16; i++) {
+    for (let j = 0; j < 16; j++) {
+      const div = document.createElement('div');
+      boardEl.appendChild(div);
+      div.setAttribute('name', `${i}-${j}`)
+      div.addEventListener('click', (e) => {
+        if (!div.querySelector('.circle')) {
+          const circle = document.createElement('div');
+          circle.setAttribute('class', turn);
+          div.appendChild(circle);
+          const name = e.target.getAttribute('name');
+          const [line, column] = name.split('-');
+          const [x, y] = [Number(line), Number(column)];
+          board[x][y] = turn;
+          verification(x, y);
+          switchTurn();
+        }
+      });
+    }
+  }
+
+  const board = [];
+  for (let i = 0; i < 16; i++) {
+    board.push([]); // lines
+    for (let j = 0; j < 16; j++) {
+      board[i].push('x'); //columns
+    }
+  }
+
+  const switchTurn = () => {
+    if (turn === 'black') {
+      turn = 'white';
+    } else {
+      turn = 'black'
+    }
+  };
+
+  const verification = (x, y) => {
+    let xTotal = 1;
+    let yTotal = 1;
+    let dTotal = 1;
+    const horizontal = (y2, sinal) => {
+      if (board?.[x]?.[y2 + sinal] === turn) {
+        xTotal++;
+        horizontal(y2 + sinal, sinal);
+      }
+    };
+    const vertical = (x2, sinal) => {
+      if (board?.[x2 + sinal]?.[y] === turn) {
+        yTotal++;
+        vertical(x2 + sinal, sinal);
+      }
+    };
+    const diagonal = (x2, y2, sinal) => {
+      if (board?.[x2 + sinal]?.[y2 + sinal] === turn) {
+        dTotal++;
+        diagonal(x2 + sinal, y2+ sinal, sinal);
+      }
+    };
+
+    horizontal(y, +1);
+    horizontal(y, -1);
+    vertical(x, +1);
+    vertical(x, -1);
+    diagonal(x, y, +1);
+    diagonal(x, y, -1);
+    (xTotal >= 5 || yTotal >= 5 || dTotal >= 5) && alert(turn, 'wins')
+  };
+
+
+</script>
+</html>
