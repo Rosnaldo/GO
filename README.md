@@ -26,13 +26,13 @@ role     | varchar(100) not null          | [string] - [required]
 confirm  |                                | [string] - [ref(password)] - [required]
 
 #### Product
-filed    |  Mysql                         |   Joi
--------- | -------------------------------|-------------
-id       | int primary key auto_increment |
-product  | varchar(100) not null          |
-price    | double not null                |
-volume   | int not null                   |
-urlImage | varchar(100) not null          |
+filed    |  Mysql                         
+-------- | -------------------------------
+id       | int primary key auto_increment 
+product  | varchar(100) not null          
+price    | double not null                
+volume   | int not null                   
+urlImage | varchar(100) not null          
 
 
 
