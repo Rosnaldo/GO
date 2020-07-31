@@ -38,6 +38,8 @@ urlImage | varchar(100) not null          |
 
 ## Routes
 
+### User
+
 #### POST: localhost:3001/user/login ⟶ [Authorization=NO]
 body
 ```
@@ -105,6 +107,8 @@ responses:
     "message": "User update with sucess!"
 }
 ```
+
+### Product
 
 #### GET: localhost:3001/products ⟶ [Authorization=YES]
 responses:
