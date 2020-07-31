@@ -24,7 +24,9 @@ role     | varchar(100) not null | [string] - [required]
 confirm  |          -            | [string] - [ref(password)] - [required]
 
 
-#### POST localhost:3001/user/login
+## Routes
+
+#### POST localhost:3001/user/login [Authorization=NO]
 body
 ```
 {
@@ -48,9 +50,7 @@ responses:
 }
 ```
 
-## Routes
-
-#### POST localhost:3001/user/register
+#### POST localhost:3001/user/register [Authorization=YES]
 
 
 body:
@@ -72,3 +72,39 @@ responses:
 }
 
 ```
+
+#### GET localhost:3001/user/profile [Authorization=YES]
+
+responses:
+**success | status: 200**
+```
+{
+    "name",
+    "email",
+}
+```
+
+#### PATCH localhost:3001/user/profile [Authorization=YES]
+body
+```
+{
+    "name": "joão das Naevs",
+    "email": "joao_venes@gmail.com",
+}
+```
+
+responses:
+**success | status: 200**
+```
+{
+    "message": "User update with sucess!"
+}
+
+
+
+
+
+
+
+
+
