@@ -106,7 +106,7 @@ responses:
 }
 ```
 
-#### PATCH: localhost:3001/products ⟶ [Authorization=YES]
+#### GET: localhost:3001/products ⟶ [Authorization=YES]
 responses:
 **success | status: 200**
 ```
