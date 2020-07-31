@@ -15,30 +15,40 @@ JWT_SECRET=[JWT_SECRET]
 
 
 ## Validations
+#### User:
 filed    |  Mysql                |   Joi
 -------- | ----------------------|-------------
-name     | varchar(100) not null | [string] - [min(12)] - [regex(/^[^\s][a-zA-Z\s]*[a-zA-z]$/)] - [required]
-email    | varchar(100) not null | [string] - [email] - [required]
-password | varchar(100) not null | [string] - [regex(/^.*(.*\d){6,}/)] - [required]
-role     | varchar(100) not null | [string] - [required]
-confirm  |          -            | [string] - [ref(password)] - [required]
+id       | int primary key auto_increment |
+name     | varchar(100) not null          | [string] - [min(12)] - [regex(/^[^\s][a-zA-Z\s]*[a-zA-z]$/)] - [required]
+email    | varchar(100) not null          | [string] - [email] - [required]
+password | varchar(100) not null          | [string] - [regex(/^.*(.*\d){6,}/)] - [required]
+role     | varchar(100) not null          | [string] - [required]
+confirm  |                                | [string] - [ref(password)] - [required]
+
+#### Product
+filed    |  Mysql                         |   Joi
+-------- | -------------------------------|-------------
+id       | int primary key auto_increment |
+product  | varchar(100) not null          |
+price    | double not null                |
+volume   | int not null                   |
+urlImage | varchar(100) not null          |
+
 
 
 ## Routes
 
-#### POST localhost:3001/user/login [Authorization=NO]
+#### POST: localhost:3001/user/login ⟶ [Authorization=NO]
 body
 ```
 {
      "email": "joao_neves@gmail.com",
      "password": "123456"
 }
-
 ```
 responses:
 **success | status: 200**
 ```
-
 {
     "token",
     "user": {
@@ -50,9 +60,7 @@ responses:
 }
 ```
 
-#### POST localhost:3001/user/register [Authorization=YES]
-
-
+#### POST: localhost:3001/user/register ⟶ [Authorization=YES]
 body:
 ```
 {
@@ -63,7 +71,6 @@ body:
      "confirm": "123456"
 }
 ```
-
 responses:
 **success | status: 201**
 ```
@@ -73,8 +80,7 @@ responses:
 
 ```
 
-#### GET localhost:3001/user/profile [Authorization=YES]
-
+#### GET: localhost:3001/user/profile ⟶ [Authorization=YES]
 responses:
 **success | status: 200**
 ```
@@ -84,7 +90,7 @@ responses:
 }
 ```
 
-#### PATCH localhost:3001/user/profile [Authorization=YES]
+#### PATCH: localhost:3001/user/profile ⟶ [Authorization=YES]
 body
 ```
 {
@@ -92,18 +98,28 @@ body
     "email": "joao_venes@gmail.com",
 }
 ```
-
 responses:
 **success | status: 200**
 ```
 {
     "message": "User update with sucess!"
 }
+```
 
-
-
-
-
+#### PATCH: localhost:3001/products ⟶ [Authorization=YES]
+responses:
+**success | status: 200**
+```
+"products": [
+        {
+            "id",
+            "product",
+            "price",
+            "volume",
+            "urlImage",
+        },
+],
+```
 
 
 
