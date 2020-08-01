@@ -34,6 +34,20 @@ price    | double not null
 volume   | int not null                   
 urlImage | varchar(100) not null          
 
+#### Order
+filed    |  Mysql                         
+-------- | -------------------------------
+id       | int primary key auto_increment,
+total    | double not null,
+date     | DATE not null,
+status   | varchar(100) not null,
+
+#### OrderItem
+filed      |  Mysql                         
+--------   | -------------------------------
+quantity   | int not null,
+order_id   | FOREIGN KEY REFERENCES orders(id),
+product_id | FOREIGN KEY REFERENCES products(id),
 
 
 ## Routes
@@ -125,6 +139,7 @@ responses:
 ],
 ```
 
+### Order
 
 
 
