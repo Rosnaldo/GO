@@ -54,7 +54,7 @@ quantity   | int not null,
 
 
 ## Routes
-
+---
 ### User
 
 #### POST: localhost:3001/user/login ⟶ [Authorization=NO]
@@ -125,6 +125,7 @@ responses:
 }
 ```
 
+---
 ### Product
 
 #### GET: localhost:3001/products ⟶ [Authorization=YES]
@@ -142,6 +143,7 @@ responses:
 ],
 ```
 
+---
 ### Order
 
 
